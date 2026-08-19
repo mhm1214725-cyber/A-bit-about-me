@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>A Bit About Me — Hassan Mehdi</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Caveat:wght@600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy: #2E3A52;
+    --navy-deep: #1B2436;
+    --parchment: #F7F2E7;
+    --gold: #B8924A;
+    --coral: #A6455A;
+    --sea: #3F6B5C;
+    --ink: #232C3D;
+  }
+
+  *{ margin:0; padding:0; box-sizing:border-box; }
+
+  html{ scroll-behavior:smooth; }
+
+  body{
+    background: var(--parchment);
+    color: var(--ink);
+    overflow-x:hidden;
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    *{ animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; scroll-behavior:auto !important; }
+  }
+
+  h1,h2,h3{ font-family:'Fraunces', serif; font-weight:600; letter-spacing: 0.2px; }
+  body{ font-family:'Plus Jakarta Sans', sans-serif; }
+
+  a:focus-visible, button:focus-visible{ outline: 3px solid var(--coral); outline-offset: 3px; }
+
+  /* --- route line spine --- */
+  .voyage{
+    position:relative;
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+  .voyage::before{
+    content:"";
+    position:absolute;
+    left: 50%;
+    top: 0;
+    bottom: 0;
+    width: 4px;
+    background-image: repeating-linear-gradient(to bottom, var(--navy) 0 10px, transparent 10px 20px);
+    transform: translateX(-50%);
+    z-index: 0;
+    opacity: 0.35;
+  }
+  @media (max-width: 720px){
+    .voyage::before{ left: 28px; }
+  }
+
+  /* --- HERO --- */
+  .hero{
+    position:relative;
+    min-height: 100vh;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    background:
+      radial-gradient(ellipse at 20% 20%, rgba(184,146,74,0.18), transparent 55%),
+      radial-gradient(ellipse at 80% 70%, rgba(166,69,90,0.12), transparent 55%),
+      linear-gradient(180deg, #FBF8F1, #F1E7D3);
+    color: var(--ink);
+    padding: 40px 24px;
+    overflow:hidden;
+  }
+
+  .waves{
+    position:absolute; bottom:0; left:0; width:100%; height:140px;
+    background: repeating-radial-gradient(circle at 0 100%, transparent 0 18px, rgba(27,36,54,0.05) 18px 20px);
+    animation: drift 12s linear infinite;
+  }
+  @keyframes drift{ from{ background-position-x:0;} to{ background-position-x:200px;} }
+
+  .flag{
+    font-size: clamp(2.2rem, 6vw, 3.2rem);
+    animation: sway 3.2s ease-in-out infinite;
+    display:inline-block;
+    margin-bottom: 8px;
+  }
+  @keyframes sway{ 0%,100%{ transform: rotate(-6deg);} 50%{ transform: rotate(6deg);} }
+
+  .hero .eyebrow{
+    font-family:'Caveat', cursive;
+    font-size: clamp(1.3rem, 3vw, 1.8rem);
+    color: var(--coral);
+    margin-bottom: 6px;
+  }
+
+  .hero h1{
+    font-size: clamp(2.4rem, 8vw, 5rem);
+    line-height:1.05;
+    color: var(--navy-deep);
+    text-shadow: 3px 3px 0 rgba(184,146,74,0.45);
+  }
+
+  .hero .role{
+    margin-top: 18px;
+    font-size: clamp(1rem, 2.5vw, 1.3rem);
+    color: var(--ink);
+    opacity:0.75;
+    max-width: 560px;
+  }
+
+  .hero .compass{
+    margin-top: 40px;
+    font-size: 1.8rem;
+    animation: spin 8s linear infinite;
+  }
+  @keyframes spin{ from{ transform: rotate(0deg);} to{ transform: rotate(360deg);} }
+
+  .scroll-hint{
+    position:absolute; bottom: 24px; left:50%; transform: translateX(-50%);
+    color: var(--navy);
+    opacity:0.6;
+    font-family:'Caveat', cursive; font-size:1.1rem;
+    animation: bob 2s ease-in-out infinite;
+  }
+  @keyframes bob{ 0%,100%{ transform: translate(-50%,0);} 50%{ transform: translate(-50%,6px);} }
+
+  /* --- LOG ENTRIES --- */
+  .log{
+    position:relative;
+    padding: 90px 0;
+  }
+
+  .entry{
+    position:relative;
+    width: calc(50% - 50px);
+    background: #FFFDF8;
+    border: 1.5px solid rgba(46,58,82,0.18);
+    border-radius: 16px;
+    padding: 28px 26px;
+    box-shadow: 0 10px 30px rgba(27,36,54,0.08);
+    z-index:1;
+  }
+  .entry.right{ margin-left: calc(50% + 50px); }
+  .entry.left{ margin-right: calc(50% + 50px); }
+
+  @media (max-width: 720px){
+    .entry, .entry.right, .entry.left{
+      width: calc(100% - 70px);
+      margin-left: 70px;
+      margin-right: 0;
+    }
+  }
+
+  .entry + .entry{ margin-top: 60px; }
+
+  .marker{
+    position:absolute;
+    top: 24px;
+    width: 20px; height: 20px;
+    background: var(--coral);
+    border: 3px solid var(--parchment);
+    box-shadow: 0 0 0 2px var(--coral);
+    border-radius: 50%;
+    z-index:2;
+  }
+  .entry.right .marker{ left: -61px; }
+  .entry.left .marker{ right: -61px; }
+  @media (max-width: 720px){
+    .entry .marker{ left: -52px; right: auto; }
+  }
+
+  .tag{
+    display:inline-block;
+    font-family:'Caveat', cursive;
+    font-weight:700;
+    font-size: 1.25rem;
+    color: var(--sea);
+    margin-bottom: 6px;
+  }
+
+  .entry h2{
+    font-size: clamp(1.3rem, 3vw, 1.8rem);
+    color: var(--navy);
+    margin-bottom: 12px;
+  }
+
+  .entry p{
+    font-size: 1rem;
+    line-height:1.65;
+  }
+
+  .stat-grid{
+    display:grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin-top: 14px;
+  }
+  .stat{
+    background: var(--navy);
+    color: var(--parchment);
+    border-radius: 8px;
+    padding: 10px 12px;
+    font-size: 0.85rem;
+  }
+  .stat b{ display:block; font-family:'Fraunces', serif; font-weight:600; font-size:0.95rem; color: var(--gold); margin-bottom:2px; }
+
+  .chip-row{ display:flex; flex-wrap:wrap; gap:8px; margin-top:14px; }
+  .chip{
+    background: rgba(184,146,74,0.16);
+    color: var(--navy-deep);
+    font-weight:600;
+    font-size: 0.8rem;
+    padding: 6px 14px;
+    border-radius: 999px;
+    border: 1px solid rgba(184,146,74,0.4);
+  }
+
+  /* --- DREAM / DESTINATION section --- */
+  .destination{
+    position:relative;
+    background: linear-gradient(180deg, var(--sea), #24413A);
+    color: #F7F2E7;
+    text-align:center;
+    padding: 100px 24px;
+    margin-top: 40px;
+  }
+  .destination::before{
+    content:"";
+    position:absolute; top:-40px; left:50%; transform:translateX(-50%);
+    width:0; height:0;
+    border-left: 24px solid transparent;
+    border-right: 24px solid transparent;
+    border-top: 40px solid var(--sea);
+  }
+  .destination h2{
+    font-size: clamp(1.8rem, 5vw, 2.6rem);
+    text-shadow: 2px 2px 0 rgba(27,36,54,0.35);
+  }
+  .destination p{
+    max-width: 560px;
+    margin: 18px auto 0;
+    font-size: 1.05rem;
+    line-height:1.7;
+    opacity:0.9;
+  }
+  .flags-row{
+    margin-top: 28px;
+    font-size: 1.6rem;
+    letter-spacing: 12px;
+  }
+
+  /* --- FOOTER --- */
+  footer{
+    background: linear-gradient(180deg, #F1E9D9, #E6DAC0);
+    color: var(--navy-deep);
+    text-align:center;
+    padding: 50px 24px 40px;
+  }
+  footer .quote{
+    font-family:'Caveat', cursive;
+    font-size: clamp(1.4rem, 3.5vw, 1.9rem);
+    color: var(--coral);
+    max-width: 520px;
+    margin: 0 auto 14px;
+  }
+  footer .sign{
+    font-family:'Fraunces', serif;
+    font-weight:600;
+    font-size: 1.1rem;
+    margin-top: 10px;
+  }
+  footer .sub{
+    opacity:0.55;
+    font-size: 0.8rem;
+    margin-top: 6px;
+  }
+
+  /* --- SONG BUTTON --- */
+  .song-btn{
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 50;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--navy-deep);
+    color: var(--parchment);
+    border: none;
+    border-radius: 999px;
+    padding: 10px 18px 10px 14px;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-weight: 600;
+    font-size: 0.85rem;
+    cursor: pointer;
+    box-shadow: 0 8px 20px rgba(27,36,54,0.25);
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+  }
+  .song-btn:hover{
+    transform: translateY(-1px);
+    box-shadow: 0 10px 24px rgba(27,36,54,0.3);
+  }
+  .song-btn .note{
+    font-size: 1rem;
+    display: inline-block;
+  }
+  .song-btn.playing .note{
+    animation: notebob 0.6s ease-in-out infinite;
+  }
+  @keyframes notebob{ 0%,100%{ transform: translateY(0);} 50%{ transform: translateY(-3px);} }
+
+  @media (max-width: 480px){
+    .song-btn{
+      top: 12px;
+      right: 12px;
+      padding: 8px 14px 8px 12px;
+      font-size: 0.75rem;
+    }
+  }
+</style>
+</head>
+<body>
+
+  <button class="song-btn" id="songBtn" aria-label="Play Bink's Brew">
+    <span class="note" aria-hidden="true">🎵</span>
+    <span id="songBtnText">Play Bink's Brew</span>
+  </button>
+  <div id="yt-player" style="position:absolute; width:1px; height:1px; overflow:hidden; opacity:0; pointer-events:none;"></div>
+
+  <section class="hero">
+    <div class="waves" aria-hidden="true"></div>
+    <span class="flag" aria-hidden="true">🏴‍☠️</span>
+    <p class="eyebrow">yo, it's me —</p>
+    <h1>Hassan Mehdi</h1>
+    <p class="role">9th grader. Straw-hat energy. Sword in one hand, football in the other, chasing the horizon in between.</p>
+    <div class="compass" aria-hidden="true">🧭</div>
+    <p class="scroll-hint">scroll down for the log ↓</p>
+  </section>
+
+  <main class="voyage">
+    <div class="log">
+
+      <article class="entry right">
+        <span class="marker" aria-hidden="true"></span>
+        <span class="tag">Crew Log, Entry 1</span>
+        <h2>The Basics</h2>
+        <p>Currently in 9th grade, figuring out the world one class (and one match) at a time.</p>
+        <div class="stat-grid">
+          <div class="stat"><b>Grade</b>9th</div>
+          <div class="stat"><b>Crew Role</b>Swordsman</div>
+          <div class="stat"><b>Favorite Anime</b>One Piece</div>
+          <div class="stat"><b>Main Sport</b>Football</div>
+        </div>
+      </article>
+
+      <article class="entry left">
+        <span class="marker" aria-hidden="true"></span>
+        <span class="tag">Crew Log, Entry 2</span>
+        <h2>Luffy Vibes, Fr</h2>
+        <p>One Piece isn't just a show I watch — it's basically a personality trait at this point. Big dreams, loyal crew, never back down from a challenge. That's the energy I try to bring every day, whether it's on the pitch or just living life.</p>
+        <div class="chip-row">
+          <span class="chip">Never gives up</span>
+          <span class="chip">Loyal to the crew</span>
+          <span class="chip">Big dreamer</span>
+        </div>
+      </article>
+
+      <article class="entry right">
+        <span class="marker" aria-hidden="true"></span>
+        <span class="tag">Crew Log, Entry 3</span>
+        <h2>On the Pitch</h2>
+        <p>Football is where I actually go to battle. Doesn't matter if it's a real match or a five-a-side with friends after school — I'm locked in. Give me a ball and a goal and I'm happy.</p>
+        <div class="chip-row">
+          <span class="chip">⚽ Football</span>
+          <span class="chip">Team player</span>
+        </div>
+      </article>
+
+      <article class="entry left">
+        <span class="marker" aria-hidden="true"></span>
+        <span class="tag">Crew Log, Entry 4</span>
+        <h2>Sword in Hand</h2>
+        <p>If I had a spot on the Straw Hat crew, I'm taking the swordsman role, no question. Disciplined, sharp, always training to get better — that's how I try to approach the things I care about.</p>
+      </article>
+
+    </div>
+  </main>
+
+  <section class="destination">
+    <h2>The Dream: See It All</h2>
+    <p>Somewhere out there is a whole world I haven't seen yet — new places, new food, new stories. One day I want to actually go find it, not just watch it on a screen.</p>
+    <div class="flags-row" aria-hidden="true">🌍 ⛵ 🗺️</div>
+  </section>
+
+  <footer>
+    <p class="quote">"The sea doesn't care how big your dream is — it just asks if you're willing to sail."</p>
+    <p class="sign">— Hassan Mehdi</p>
+    <p class="sub">a bit about me · thanks for reading</p>
+  </footer>
+
+</body>
+</html>
